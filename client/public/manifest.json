@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "React Node Mysql Express",
+  "name": "Simple CRUD Operations with Boilerplate.",
   "icons": [
     {
       "src": "favicon.ico",
