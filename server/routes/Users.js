@@ -7,7 +7,7 @@ const bcrypt = require("bcrypt");
 router.post("/", async(req, res) => {
    const {username, email, password} = req.body;
    bcrypt.hash(password,10).then((hash)=>{
-    Users.create({
+    Users.create({ 
         username: username,
         email: email,
         password: hash
@@ -16,6 +16,21 @@ router.post("/", async(req, res) => {
    });
 });
 
+router.post('/login', async (req, res) => {
+    console.log("req",req)
+    const {username, password} = req.body;
+
+    const user = await Users.findOne({where:{username: username}});
+
+    if(!user) res.json({error: "User Dosen't Exist"});
+
+    bcrypt.compare(password, user.password).then((match)=>{
+        if(!match) res.json({error: "Wrong Username and Password Combination!"});
+
+        res.json("User Logged in");
+    })
+});
+  
 
 module.exports = router;
 
